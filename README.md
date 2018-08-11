@@ -3,7 +3,7 @@
 
 ## Analysis of Plethodon clutch and developmental data
 
-# Authors: Zachary R. Lewis, Brooks G. Mathewson, James Hanken
+### Authors: Zachary R. Lewis, Brooks G. Mathewson, James Hanken
 
 
 ## Contents
