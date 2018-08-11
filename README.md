@@ -8,7 +8,8 @@
 
 ## Contents
 
-- `analysis.R` The `R` script for generating figures and tables.
+- `analysis.R` The `R` script for generating figures and tables. For Figure 1, to output the inset ("blowup")
+ of early stages, un-comment the viewport code and run the relevant code in console directly.
 - `clutchData.csv` Dataset on clutch encounters in Massachusetts
 - `clutchDataClimate.csv` Climate data
 - `staging_at_15C.csv` Staging data for lab-reared clutches
