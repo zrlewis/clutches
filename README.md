@@ -9,7 +9,7 @@
 ## Contents
 
 - `analysis.R` The `R` script for generating figures and tables.
-- `clutchData.xlsx` Dataset on clutch encounters in Massachusetts
+- `clutchData.csv` Dataset on clutch encounters in Massachusetts
 - `clutchDataClimate.csv` Climate data
 - `staging_at_15C.csv` Staging data for lab-reared clutches
 
