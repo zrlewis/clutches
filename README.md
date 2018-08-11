@@ -1,7 +1,7 @@
 # clutches
 
 
-## Analysis of Plethodon clutch and developmental data
+## Analysis of _Plethodon cinereus_ clutch and developmental data
 
 ### Authors: Zachary R. Lewis, Brooks G. Mathewson, James Hanken
 
@@ -10,9 +10,9 @@
 
 - `analysis.R` The `R` script for generating figures and tables. For Figure 1, to output the inset ("blowup")
  of early stages, un-comment the viewport code and run the relevant code in console directly.
-- `clutchData.csv` Dataset on clutch encounters in Massachusetts
+- `clutchData.csv` Dataset on _Plethodon cinereus_ clutch encounters in Massachusetts
 - `clutchDataClimate.csv` Climate data
-- `staging_at_15C.csv` Staging data for lab-reared clutches
+- `staging_at_15C.csv` Staging data for lab-reared clutches of _P. cinereus_
 
 ## Dependencies
 
@@ -28,8 +28,10 @@
 
 Each time you want to execute an analysis:
 
-- Navigate to the root of the repository, e.g., `clutches`.
+- Clone the repository, e.g., `git clone https://github.com/zrlewis/clutches.git`
+- Navigate to the root of the repository, e.g., `cd clutches`.
 - Run the code, e.g., launch `R` and run `source("analysis.R")`.
+- The figures and tables will be generated in your repository. 
 
 
 
