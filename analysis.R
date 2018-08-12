@@ -141,6 +141,7 @@ model<-lm(yday(Collection.Date)~ Stage, data=clutchData)
 #' @param lm linear model to extract
 #' @return values of slope intercept, etc
 #' @export
+#' Adapted from Peter Solymos
 
 modelExtract <-function(lm)
 {
@@ -164,6 +165,7 @@ modelFeatures<-as.data.frame(modelExtract(model))
 #' @param m linear model to extract
 #' @return slope intercept formula and r-squared
 #' @export
+#' Adapted from Fernando (fgtaboada) https://groups.google.com/forum/#!topic/ggplot2/1TgH-kG5XMA
 
 lm_eqn = function(m) {
   
@@ -206,7 +208,7 @@ collection_date <- ggplot(data=clutchData, mapping = aes(yday(Collection.Date), 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 25)) +
   theme_classic() +
   guides(colour = guide_legend(title="Year")) +
-  labs(x = "Collection Day") +
+  labs(x = "Collection Day", y = "Clutches") +
   theme(legend.position = "top")
 
 #adding lettering
@@ -220,7 +222,7 @@ collection_date <- arrangeGrob(collection_date, top = textGrob("B", x = unit(0, 
 
 figure4 <- grid.arrange(clutch_by_year, collection_date, ncol = 2)
 
-ggsave( "figure4.pdf", figure4, device=pdf, width=6, height=4 )
+ggsave( "figure4.pdf", figure4, device=pdf, width=6.5, height=4 )
 
 
 #####################
