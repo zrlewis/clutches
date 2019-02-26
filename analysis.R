@@ -18,7 +18,7 @@ library(broom)
 ###################
 
 clutchData <-read_csv("clutchData.csv", 
-                      col_types=cols(Collection.Date= col_date(format="%m/%d/%y")))
+                      col_types=cols('Collection.Date'= col_date(format="%m/%d/%y")))
 head(clutchData)
 data.precip <-read_csv("clutchDataClimate.csv", 
                        col_types=cols(Collection.Date= col_date(format="%m/%d/%y")))
@@ -65,7 +65,7 @@ blowup <- ggplot(stageData, aes(x=DPF,y=Stage)) +
   xlim(1,6) +
   #theme_set(theme_classic(base_size = 8))
   
-ggsave( "figure1.pdf", mainplot, device=pdf, width=5, height=4 )
+ggsave(filename="figure1.pdf", mainplot, device="pdf", width=5, height=4 )
 
 # uncomment the following lines to save the blowup 
 
@@ -112,7 +112,7 @@ figure2 <- grid.arrange(stage_by_site, stage_by_clutch, ncol = 2)
 
 #export figure
 
-ggsave( "figure2.pdf", figure2, device=pdf, width=6, height=4 )
+ggsave( "figure2.pdf", figure2, device="pdf", width=6, height=4 )
 
 ################################
 # fitting linear model to stage
@@ -189,7 +189,7 @@ figure6<- collectionDate_by_stage +
            label = lm_eqn(lm(yday(Collection.Date) ~ Stage, data=clutchData)), 
            colour="black", size = 4, parse=TRUE)
 
-ggsave( "figure6.pdf", figure6, device=pdf, width=6, height=4 )
+ggsave( "figure6.pdf", figure6, device="pdf", width=6, height=4 )
 
 ####################
 #clutch size by year
@@ -222,7 +222,7 @@ collection_date <- arrangeGrob(collection_date, top = textGrob("B", x = unit(0, 
 
 figure4 <- grid.arrange(clutch_by_year, collection_date, ncol = 2)
 
-ggsave( "figure4.pdf", figure4, device=pdf, width=6.5, height=4 )
+ggsave( "figure4.pdf", figure4, device="pdf", width=6.5, height=4 )
 
 
 #####################
@@ -267,7 +267,7 @@ size_by_stage <- arrangeGrob(size_by_stage, top = textGrob("B", x = unit(0, "npc
 
 figure3 <- grid.arrange(size_by_date, size_by_stage, ncol = 2)
 
-ggsave( "figure3.pdf", figure3, device=pdf, width=6, height=4 )
+ggsave( "figure3.pdf", figure3, device="pdf", width=6, height=4 )
 
 
 #######################
