@@ -37,7 +37,7 @@ Year=clutchData[,7]
 Simple.Site=clutchData[,8] #HF is a bin of Harvard Pond, Slab City, North of Slab City and Rutland Brook
 #defining levels for categorical variables
 yearLevels<-c("2012","2013","2014","2015")
-cat.Year<-parse_factor(clutchData$Year,yearLevels)
+cat.Year<-factor(clutchData$Year,yearLevels)
 siteLevels <- c("HF", "WM", "WB")
 cat.Simple.Site <-parse_factor(clutchData$Simple.Site,siteLevels)
 
@@ -82,7 +82,7 @@ ggsave(filename="figure1.pdf", mainplot, device="pdf", width=5, height=4 )
 #############################################
 
 stage_by_site <- ggplot(clutchData, aes(x=yday(Collection.Date),y=Stage,col=Simple.Site)) + 
-  geom_point() + 
+  geom_point(size=2) + 
   geom_smooth(method =lm) + #can be left blank for no linear model
   scale_colour_hue(l=50) + #make the colors a little darker
   labs(x = "Collection Day") +
@@ -93,9 +93,9 @@ stage_by_site <- ggplot(clutchData, aes(x=yday(Collection.Date),y=Stage,col=Simp
 #display clutch size as color, showing decline in clutch size over time
 stage_by_clutch <- ggplot(data = subset(clutchData, !is.na(Clutch.Size)),  #excluding those with no clutch size
                           aes(x=yday(Collection.Date),y=Stage,col=Clutch.Size)) + 
-  geom_point(size=3) +
+  geom_point(size=2) +
   labs(x = "Collection Day", y = "Stage") +
-  scale_colour_gradientn(colours = heat.colors(4, alpha = 0.5), name="Clutch\nSize") +
+  scale_colour_gradientn(colours = heat.colors(4), name="Clutch\nSize") +
   theme_classic() + #removes grey panel background
   theme(legend.position = "bottom")
 
@@ -198,7 +198,7 @@ ggsave( "figure6.pdf", figure6, device="pdf", width=6, height=4 )
 clutch_by_year <- ggplot(data=clutchData, mapping = aes(y=Clutch.Size,x=cat.Year)) +
   geom_boxplot() + 
   geom_jitter(width=0.1, aes(colour=yday(Collection.Date))) + #added data points here
-  scale_colour_gradientn(colours = heat.colors(4, alpha = 0.6), name="Collection \nDay") + #color scale for jitter
+  scale_colour_gradientn(colours = heat.colors(4), name="Collection \nDay") + #color scale for jitter
   theme_classic() +
   labs(x = "Year", y = "Clutch Size")
 
@@ -209,7 +209,8 @@ collection_date <- ggplot(data=clutchData, mapping = aes(yday(Collection.Date), 
   theme_classic() +
   guides(colour = guide_legend(title="Year")) +
   labs(x = "Collection Day", y = "Clutches") +
-  theme(legend.position = "top")
+  theme(legend.position = 'top')
+
 
 #adding lettering
 clutch_by_year <- arrangeGrob(clutch_by_year, top = textGrob("A", x = unit(0, "npc")
@@ -222,7 +223,7 @@ collection_date <- arrangeGrob(collection_date, top = textGrob("B", x = unit(0, 
 
 figure4 <- grid.arrange(clutch_by_year, collection_date, ncol = 2)
 
-ggsave( "figure4.pdf", figure4, device="pdf", width=6.5, height=4 )
+ggsave( "figure4.pdf", figure4, device="pdf", width=7, height=4 )
 
 
 #####################
