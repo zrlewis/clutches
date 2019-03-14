@@ -278,13 +278,15 @@ ggsave( "figure3.pdf", figure3, device="pdf", width=6, height=4 )
 # There is no significant difference in clutch sizes between sites:
 
 res <- TukeyHSD(aov(lm(Clutch.Size~Simple.Site, data=clutchData)))
+tidy(res)
+
 write.csv(tidy(res), file="TableS2.output.csv")
 
 # There are significant differences in clutch size between certain years:
 
 TukeyHSD(aov(lm(Clutch.Size~cat.Year, data=clutchData)))
 
-# There is no effect of site of stage:
+# There is no effect of site of stage at collection:
 
 TukeyHSD(aov(lm(Stage~Simple.Site, data=clutchData)))
 
@@ -295,6 +297,7 @@ summary(lm(Clutch.Size~Year, data=clutchData))
 # Year and collection date explain the variation in stage.
 stage.lm <-lm(Stage~ Year + Calendar.Date + Simple.Site, data=clutchData)
 summary(stage.lm)
+
 #plot(residuals(stage.lm), fitted(stage.lm))
 
 #write output to table
