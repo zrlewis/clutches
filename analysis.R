@@ -54,7 +54,11 @@ mainplot <- ggplot(stageData, aes(x=DPF,y=Stage)) +
   geom_point() + 
   geom_line() + 
   labs(x = "Days Post-Oviposition (dpo)", y = "Stage") +
-  theme_classic()
+  theme_classic() +
+  theme(axis.text=element_text(size=14),
+    axis.title=element_text(size=12,face="bold"), 
+    legend.text = element_text(size=12), 
+    legend.title = element_text(size = 12))
 
 blowup <- ggplot(stageData, aes(x=DPF,y=Stage)) + 
   geom_point() + 
@@ -70,7 +74,7 @@ ggsave(filename="figure1.pdf", mainplot, device="pdf", width=5, height=4 )
 # uncomment the following lines to save the blowup 
 
 # pdf("figure1.pdf", width = 6, height = 4)
-# subvp <- viewport(width = 0.4, height = 0.4, x = 0.795, y = 0.32)
+# subvp <- viewport(width = 0.4, height = 0.4, x = 0.795, y = 0.34)
 # blowup
 # print(mainplot)
 # 
@@ -88,7 +92,12 @@ stage_by_site <- ggplot(clutchData, aes(x=yday(Collection.Date),y=Stage,col=Simp
   labs(x = "Collection Day") +
   theme_classic() + #removes grey panel background 
   scale_colour_discrete(name  = "Field\nSite") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom", 
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=12,face="bold"), 
+        legend.text = element_text(size=12), 
+        legend.title = element_text(size = 12))
+
 
 #display clutch size as color, showing decline in clutch size over time
 stage_by_clutch <- ggplot(data = subset(clutchData, !is.na(Clutch.Size)),  #excluding those with no clutch size
@@ -97,7 +106,11 @@ stage_by_clutch <- ggplot(data = subset(clutchData, !is.na(Clutch.Size)),  #excl
   labs(x = "Collection Day", y = "Stage") +
   scale_colour_gradientn(colours = heat.colors(4), name="Clutch\nSize") +
   theme_classic() + #removes grey panel background
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom", 
+        axis.text=element_text(size=14),
+        axis.title=element_text(size=12,face="bold"), 
+        legend.text = element_text(size=12), 
+        legend.title = element_text(size = 12))
 
 #adding lettering
 stage_by_site <- arrangeGrob(stage_by_site, top = textGrob("A", x = unit(0, "npc")
@@ -129,8 +142,12 @@ collectionDate_by_stage <- ggplot(clutchData, aes(x=Stage,y=yday(Collection.Date
   theme_classic() + #removes grey panel background 
   theme(legend.position = "bottom") +
   coord_cartesian(xlim = c(0, 18), ylim=c(155,190)) + #change x and y limits
-  scale_x_continuous(expand = c(0, 0), limits = c(0, 15)) # make x start at 0
-
+  scale_x_continuous(expand = c(0, 0), limits = c(0, 15)) + # make x start at 0
+  theme(axis.text=element_text(size=14),
+        axis.title=element_text(size=12,face="bold"), 
+        legend.text = element_text(size=12), 
+        legend.title = element_text(size = 12))
+  
 model<-lm(yday(Collection.Date)~ Stage, data=clutchData)
 #summary(model)
 
@@ -200,7 +217,12 @@ clutch_by_year <- ggplot(data=clutchData, mapping = aes(y=Clutch.Size,x=cat.Year
   geom_jitter(width=0.1, aes(colour=yday(Collection.Date))) + #added data points here
   scale_colour_gradientn(colours = heat.colors(4), name="Collection \nDay") + #color scale for jitter
   theme_classic() +
-  labs(x = "Year", y = "Clutch Size")
+  labs(x = "Year", y = "Clutch Size") +
+  theme(
+        axis.text=element_text(size=14),
+        axis.title=element_text(size=12,face="bold"), 
+        legend.text = element_text(size=12), 
+        legend.title = element_text(size = 12))
 
 
 collection_date <- ggplot(data=clutchData, mapping = aes(yday(Collection.Date), col=cat.Year)) +
@@ -209,7 +231,11 @@ collection_date <- ggplot(data=clutchData, mapping = aes(yday(Collection.Date), 
   theme_classic() +
   guides(colour = guide_legend(title="Year")) +
   labs(x = "Collection Day", y = "Clutches") +
-  theme(legend.position = 'top')
+  theme(legend.position = 'top',
+        axis.text=element_text(size=14),
+        axis.title=element_text(size=12,face="bold"), 
+        legend.text = element_text(size=12), 
+        legend.title = element_text(size = 12))
 
 
 #adding lettering
@@ -223,7 +249,7 @@ collection_date <- arrangeGrob(collection_date, top = textGrob("B", x = unit(0, 
 
 figure4 <- grid.arrange(clutch_by_year, collection_date, ncol = 2)
 
-ggsave( "figure4.pdf", figure4, device="pdf", width=7, height=4 )
+ggsave( "figure4.pdf", figure4, device="pdf", width=8, height=4 )
 
 
 #####################
@@ -244,7 +270,11 @@ size_by_date <- ggplot(clutchData_noWB, aes(x=yday(Collection.Date),y=Clutch.Siz
   #guides(colour=FALSE) + #remove legend
   scale_colour_brewer(palette="Set1") +
   theme_classic() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        axis.text=element_text(size=14),
+        axis.title=element_text(size=12,face="bold"), 
+        legend.text = element_text(size=12), 
+        legend.title = element_text(size = 12))
 
 size_by_stage <- ggplot(clutchData_noWB, aes(x=Stage,y=Clutch.Size,col=Simple.Site)) + 
   geom_point() + 
@@ -255,7 +285,11 @@ size_by_stage <- ggplot(clutchData_noWB, aes(x=Stage,y=Clutch.Size,col=Simple.Si
   scale_colour_discrete(name  = "Field Site") +
   scale_colour_brewer(palette="Set1") +
   theme_classic() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        axis.text=element_text(size=14),
+        axis.title=element_text(size=12,face="bold"), 
+        legend.text = element_text(size=12), 
+        legend.title = element_text(size = 12))
 
 #adding lettering
 size_by_date <- arrangeGrob(size_by_date, top = textGrob("A", x = unit(0, "npc")
