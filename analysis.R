@@ -20,7 +20,7 @@ library(broom)
 clutchData <-read_csv("clutchData.csv", 
                       col_types=cols('Collection.Date'= col_date(format="%m/%d/%y")))
 head(clutchData)
-data.precip <-read_csv("clutchDataClimate.csv", 
+data.precip <-read_csv("climateData.csv", 
                        col_types=cols(Collection.Date= col_date(format="%m/%d/%y")))
 stageData <-read_csv("staging_at_15C.csv")
 head(stageData)
@@ -185,28 +185,35 @@ modelFeatures<-as.data.frame(modelExtract(model))
 #' Adapted from Fernando (fgtaboada) https://groups.google.com/forum/#!topic/ggplot2/1TgH-kG5XMA
 
 lm_eqn = function(m) {
-  
-  l <- list(a = format(coef(m)[1], digits = 2),
-            b = format(abs(coef(m)[2]), digits = 2),
+
+  l <- list(a = as.character(format(coef(m)[1], digits = 2)),
+            b = as.character(format(abs(coef(m)[2]), digits = 2)),
             r2 = format(summary(m)$r.squared, digits = 3));
   
   if (coef(m)[2] >= 0)  {
     eq <- substitute(italic(y) == a + b %.% italic(x)*","~~italic(r)^2~"="~r2,l)
   } else {
-    eq <- substitute(italic(y) == a - b %.% italic(x)*","~~italic(r)^2~"="~r2,l)    
+    eq <- substitute(italic(y) == a - b %.% italic(x)*","~~italic(r)^2~"="~r2,l)
   }
-  
-  as.character(as.expression(eq));                 
+
+  as.character(as.expression(eq));
 }
+
+labelText = lm_eqn(lm(yday(Collection.Date) ~ Stage, data=clutchData))
 
 figure6<- collectionDate_by_stage + 
   geom_abline(intercept = modelFeatures[1,], slope = modelFeatures[2,], 
               color="red", linetype="dashed", size=1.5) +
-  annotate("text", x = 5, y = 190,
-           label = lm_eqn(lm(yday(Collection.Date) ~ Stage, data=clutchData)), 
+  annotate("text", x = 4, y = 190,
+           label = labelText, 
            colour="black", size = 4, parse=TRUE)
+figure6
+
 
 ggsave( "figure6.pdf", figure6, device="pdf", width=6, height=4 )
+
+
+
 
 ####################
 #clutch size by year
