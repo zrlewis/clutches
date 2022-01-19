@@ -66,7 +66,7 @@ blowup <- ggplot(stageData, aes(x=DPF,y=Stage)) +
   labs(x = "dpo", y = "Stage") +
   theme_classic(base_size = 8) + #reducing font size here
   ylim(2, 7) +
-  xlim(1,6) +
+  xlim(1,6) # +
   #theme_set(theme_classic(base_size = 8))
   
 ggsave(filename="figure1.pdf", mainplot, device="pdf", width=5, height=4 )
